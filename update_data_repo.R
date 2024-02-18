@@ -1,9 +1,9 @@
-##  Updating the hockeyR data repo
+##  Updating the puckR data repo
 
-#devtools::install_github("danmorse314/hockeyR")
+#devtools::install_github("danmorse314/puckR")
 
 # get current season data
-pbp <- hockeyR::load_pbp(shift_events = TRUE)
+pbp <- puckR::load_pbp(shift_events = TRUE)
 
 # check for missing shift data in certain games
 ids_to_pull <- pbp |>
@@ -18,7 +18,7 @@ ids_to_pull <- pbp |>
 if(length(ids_to_pull) > 0){
   pbp_day <- purrr::map_dfr(
     .x = ids_to_pull,
-    ~hockeyR::scrape_game(.x)
+    ~puckR::scrape_game(.x)
   )
 
   # check to see if it actually worked
@@ -31,7 +31,7 @@ if(length(ids_to_pull) > 0){
 }
 
 # getting the reverse in function
-library(hockeyR)
+library(puckR)
 
 # combine
 pbp_updated <- dplyr::bind_rows(
@@ -41,13 +41,13 @@ pbp_updated <- dplyr::bind_rows(
   dplyr::distinct()
 
 # scraping whole season up to a point
-#games <- hockeyR::get_game_ids(season = 2023)
+#games <- puckR::get_game_ids(season = 2023)
 
 #games <- dplyr::filter(games, date < Sys.Date())
 
 #pbp_updated <- purrr::map_dfr(
 #  .x = games$game_id,
-#  ~hockeyR::scrape_game(.x)
+#  ~puckR::scrape_game(.x)
 #)
 
 if(is.null(pbp) & nrow(pbp_updated) > 0){
