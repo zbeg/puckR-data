@@ -1,6 +1,6 @@
 ##  Updating the puckR data repo
 
-#devtools::install_github("danmorse314/puckR")
+#devtools::install_github("zbeg/puckR")
 
 # get current season data
 pbp <- puckR::load_pbp(shift_events = TRUE)
