@@ -1,16 +1,16 @@
-##  Updating the hockeyR data repo
+##  Updating the puckR data repo
 
 install.packages(c("dplyr","glue","crunch","remotes"))
-remotes::install_github("danmorse314/hockeyR")
+remotes::install_github("zbeg/puckR")
 
 # get current season data
-pbp <- hockeyR::load_pbp(shift_events = TRUE)
+pbp <- puckR::load_pbp(shift_events = TRUE)
 
 # get day's pbp data
 #   running for yesterday, because this code runs after midnight
-pbp_day <- hockeyR::scrape_day(Sys.Date()-1)
+pbp_day <- puckR::scrape_day(Sys.Date()-1)
 
-`%not_in%` <- hockeyR::`%not_in%`
+`%not_in%` <- puckR::`%not_in%`
 
 # make sure we're not double loading some games
 pbp_day <- dplyr::filter(pbp_day, game_id %not_in% unique(pbp$game_id))
